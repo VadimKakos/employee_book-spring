@@ -3,26 +3,16 @@ package com.skypro.employee.service;
 import com.skypro.employee.model.Employee;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.OptionalInt;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
 public class DepartmentService {
 
-    private  EmployeeRepository employeeRepository;
+    private EmployeeRepository employeeRepository;
 
     public DepartmentService(EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
-    }
-
-    private final Map<Integer, Employee> employeesDepartment = new HashMap<>();
-
-    public Employee addEmployee(int id, Employee employee) {
-        this.employeesDepartment.put(id, employee);
-        return employee;
     }
 
     public Collection<Employee> getAllEmployees() {
@@ -45,5 +35,22 @@ public class DepartmentService {
         return getAllDepartmentEmployees(id).stream()
                 .mapToInt(Employee::getSalary)
                 .max();
+    }
+
+    public OptionalInt getMinSalary(int id) {
+        return getAllDepartmentEmployees(id).stream()
+                .mapToInt(Employee::getSalary)
+                .min();
+    }
+
+    public Set<Integer> getExistingDepartment() {
+        return employeeRepository.getEmployees().stream()
+                .map(Employee::getDepartment)
+                .collect(Collectors.toSet());
+    }
+
+    public Map<Integer, Collection<Employee>> getEmployeesByDepartment() {
+        return getExistingDepartment().stream()
+                .collect(Collectors.toMap(dept -> dept, this::getAllDepartmentEmployees));
     }
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.Map;
 import java.util.OptionalInt;
 
 @RestController
@@ -39,15 +40,15 @@ public class DepartmentController {
     public OptionalInt getMaxSalaryDepartment(@PathVariable("id") int id) {
         return this.departmentService.getMaxSalary(id);
     }
-/*
-    @PostMapping("/salary/min")
-    public Employee getMinSalaryDepartment(@RequestBody EmployeeRequest employeeRequest) {
-        return this.departmentService.addEmployee(employeeRequest);
+
+
+    @GetMapping("/department/{id}/salary/min")
+    public OptionalInt getMinSalaryDepartment(@PathVariable("id") int id) {
+        return this.departmentService.getMinSalary(id);
     }
 
-    @GetMapping("/employees")
-    public int getAllEmployeesOfDepartment() {
-        return this.departmentService.getSalarySum();
+   @GetMapping("/department/employees")
+    public Map<Integer, Collection<Employee>> getAllEmployeesOfDepartment(@PathVariable("id") int id) {
+        return this.departmentService.getEmployeesByDepartment();
     }
-*/
 }
