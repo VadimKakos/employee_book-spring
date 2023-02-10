@@ -5,17 +5,17 @@ import com.skypro.employee.record.EmployeeRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 @Service
 public class EmployeeService {
-    private final Map<Integer, Employee> employees = new HashMap<>();
+    //private final Map<Integer, Employee> employees = new HashMap<>();
 
-     public Collection<Employee> getAllEmployees() {
-        return this.employees.values();
-    }
+    EmployeeRepository employeeRepository = new EmployeeRepository();
+  //  public Collection<Employee> getAllEmployees() {
+    //    return this.employees.values();
+    //}
 
     public Employee addEmployee(EmployeeRequest employeeRequest) {
         if (employeeRequest.getFirstName() == null || employeeRequest.getLastName() == null) {
@@ -25,14 +25,15 @@ public class EmployeeService {
                 employeeRequest.getLastName(),
                 employeeRequest.getDepartment(),
                 employeeRequest.getSalary());
-        this.employees.put(employee.getId(), employee);
+       // this.employees.put(employee.getId(), employee);
 
+        employeeRepository.addEmployee(employee);
         return employee;
     }
 
     public int getSalarySum() {
-        return employees.values().stream()
-        .mapToInt(Employee::getSalary)
-        .sum();
+        return employeeRepository.getEmployees().stream()
+                .mapToInt(Employee::getSalary)
+                .sum();
     }
 }

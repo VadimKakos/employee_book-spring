@@ -20,10 +20,10 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    @GetMapping("/employees")
-    public Collection<Employee> getAllEmployees() {
-        return this.employeeService.getAllEmployees();
-    }
+    //@GetMapping("/employees")
+    //public Collection<Employee> getAllEmployees() {
+        //return this.employeeService.getAllEmployees();
+  //  }
 
     @PostMapping("/employees")
     public Employee createEmployee(@RequestBody EmployeeRequest employeeRequest) {

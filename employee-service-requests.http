@@ -8,7 +8,7 @@ Content-type: application/json
   "firstName": "test",
   "lastName": "test",
   "department": 1,
-  "salary": 1000
+  "salary": 3000
 }
 ### Создать сотрудника 2
 POST http://localhost:8080/employees
@@ -17,10 +17,23 @@ Content-type: application/json
 {
   "firstName": "test2",
   "lastName": "test2",
-  "department": 2,
+  "department": 1,
   "salary": 2000
 }
 
 
 ### Получить сумму зарплат
 GET http://localhost:8080/employees/salary/sum
+
+### возвращает список сотрудников по департаменту.
+GET http://localhost:8080/department/1/employees
+
+
+###
+GET http://localhost:8080/allEmployees
+
+### возвращает сумму зарплат по департаменту
+GET http://localhost:8080/department/1/salary/sum
+
+###возвращает максимальную зарплату по департаменту.
+GET http://localhost:8080/department/1/salary/max
