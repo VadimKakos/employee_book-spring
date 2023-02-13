@@ -33,8 +33,6 @@ public class DepartmentController {
         return this.departmentService.getSalarySum(id);
     }
 
-    //GET http://localhost:8080/department/{id}/salary/max
-      //      — возвращает максимальную зарплату по департаменту.
 
     @GetMapping("department/{id}/salary/max")
     public OptionalInt getMaxSalaryDepartment(@PathVariable("id") int id) {
