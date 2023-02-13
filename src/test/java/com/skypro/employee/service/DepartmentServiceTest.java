@@ -109,5 +109,6 @@ class DepartmentServiceTest {
                 .collect(Collectors.toMap(dept -> dept, dept -> actualEmployees.stream().filter(e -> e.getDepartment() == dept).collect(Collectors.toList())));
         Map<Integer, Collection<Employee>> expected = departmentService.getEmployeesByDepartment();
         assertEquals(actual,expected);
+
     }
 }
